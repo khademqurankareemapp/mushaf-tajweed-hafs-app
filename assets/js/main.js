@@ -1,9 +1,13 @@
 (function () {
   'use strict';
 
-  // Footer year
+  // Footer year (Eastern Arabic-Indic digits, e.g. ٢٠٢٦ not 2026)
   var yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  if (yearEl) {
+    var indicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+    var year = String(new Date().getFullYear());
+    yearEl.textContent = year.replace(/[0-9]/g, function (d) { return indicDigits[+d]; });
+  }
 
   // Mobile nav toggle
   var navToggle = document.getElementById('navToggle');
